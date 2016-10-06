@@ -15,10 +15,6 @@ QWidgetRenderer::QWidgetRenderer(QWidget* window)
 
     _window->show();
 
-}
-
-void QWidgetRenderer::start()
-{
     GLWidget *openGL = new GLWidget(&helper, _window, &_renderables);
 
     QGridLayout *layout = new QGridLayout;
@@ -28,6 +24,4 @@ void QWidgetRenderer::start()
     QTimer *timer = new QTimer(_window);
     _window->connect(timer, &QTimer::timeout, openGL, &GLWidget::animate);
     timer->start(1);
-
 }
-

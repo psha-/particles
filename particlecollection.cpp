@@ -19,3 +19,11 @@ void ParticleCollection::render(Renderer* renderer)
     }
 }
 
+ParticleCollection::~ParticleCollection()
+{
+    for (auto it = _particles.begin() ; it != _particles.end(); ++it)
+       {
+         delete (*it);
+       }
+       _particles.clear();
+}

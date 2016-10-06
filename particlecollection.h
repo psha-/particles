@@ -18,6 +18,8 @@ public:
     void update();
     void render(Renderer *renderer);
 
+    virtual ~ParticleCollection();
+
 protected:
     std::vector<Particle*> _particles;
     Vec3 _position;

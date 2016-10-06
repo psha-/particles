@@ -9,7 +9,6 @@ class Renderer
 public:
     Renderer();
 
-    virtual void start() = 0;
     virtual void addRenderable(Renderable* renderable);
 
 protected:

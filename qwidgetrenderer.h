@@ -10,7 +10,6 @@ class QWidgetRenderer : public Renderer
 {
 public:
     QWidgetRenderer(QWidget* window);
-    void start();
 
 private:
     Helper helper;
