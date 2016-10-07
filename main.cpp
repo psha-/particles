@@ -1,4 +1,6 @@
+#include "particlesource.h"
 #include "particlecollection.h"
+#include "explosionparticle.h"
 #include "qwidgetrenderer.h"
 #include <memory>
 #include <QApplication>
@@ -10,13 +12,15 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QWidget window;
-    std::unique_ptr<Renderable> particles(new ParticleCollection({
-        new Particle({10,10,10}, {0.1,0,0}, {0,0.02,0}),
-        new Particle({10,10,10}, {0.1,0.1,0}, {0,0.05,0}),
-        new Particle({10,10,10}, {0.5,0.3,0}, {0.01,0.02,0}),
-    }));
+    std::unique_ptr<ParticleCollection> explosion(new ParticleCollection());
+    ParticleSource<ExplosionParticle> source(explosion.get(), {180, 200, 0}, {220, 240, 0});
+
+    for(int i=0; i<100; i++) {
+        explosion->addParticle(source.next());
+    }
+
     QWidgetRenderer renderer(&window);
-    particles->render(&renderer);
+    explosion->render(&renderer);
 
     return app.exec();
 }

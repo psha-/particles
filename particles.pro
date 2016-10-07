@@ -20,9 +20,10 @@ SOURCES += main.cpp \
     renderable.cpp \
     renderer.cpp \
     glwidget.cpp \
-    helper.cpp \
     qwidgetrenderer.cpp \
-    particlecollection.cpp
+    particlecollection.cpp \
+    painthelper.cpp \
+    explosionparticle.cpp
 
 HEADERS += \
     particle.h \
@@ -30,7 +31,9 @@ HEADERS += \
     renderable.h \
     renderer.h \
     glwidget.h \
-    helper.h \
     qwidgetrenderer.h \
     vec3.h \
-    particlecollection.h
+    particlecollection.h \
+    painthelper.h \
+    explosionparticle.h \
+    particlesource.h

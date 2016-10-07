@@ -3,7 +3,7 @@
 
 #include "renderable.h"
 #include "renderer.h"
-#include "helper.h"
+#include "painthelper.h"
 #include <vector>
 
 class QWidgetRenderer : public Renderer
@@ -12,7 +12,7 @@ public:
     QWidgetRenderer(QWidget* window);
 
 private:
-    Helper helper;
+    PaintHelper helper;
     QWidget* _window;
 };
 

@@ -9,12 +9,23 @@
 class ParticleCollection : public Renderable
 {
 public:
-    ParticleCollection(std::vector<Particle*> particles);
+    ParticleCollection(std::vector<Particle*> particles = {});
 
     inline Vec3 getPosition()
     {
         return _position;
     }
+
+    inline void addParticle(Particle* particle)
+    {
+        _particles.push_back(particle);
+    }
+
+    inline std::vector<Particle*>& getParticles()
+    {
+        return _particles;
+    }
+
     void update();
     void render(Renderer *renderer);
 

@@ -5,14 +5,14 @@
 #include <vector>
 #include <QOpenGLWidget>
 
-class Helper;
+class PaintHelper;
 
 class GLWidget : public QOpenGLWidget
 {
     Q_OBJECT
 
 public:
-    GLWidget(Helper *helper, QWidget *parent, std::vector<Renderable*>* renderables);
+    GLWidget(PaintHelper *paintHelper, QWidget *parent, std::vector<Renderable*>* renderables);
 
 public slots:
     void animate();
@@ -21,7 +21,7 @@ protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    Helper *helper;
+    PaintHelper *paintHelper;
     std::vector<Renderable*>* _renderables;
 
 };

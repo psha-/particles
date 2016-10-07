@@ -1,10 +1,10 @@
-#include "helper.h"
+#include "painthelper.h"
 
 #include <QPainter>
 #include <QPaintEvent>
 #include <QWidget>
 
-Helper::Helper()
+PaintHelper::PaintHelper()
 {
     QLinearGradient gradient(QPointF(50, -20), QPointF(80, 20));
     gradient.setColorAt(0.0, Qt::white);
@@ -17,14 +17,14 @@ Helper::Helper()
     textFont.setPixelSize(50);
 }
 
-void Helper::paint(QPainter *painter, QPaintEvent *event, Renderable* renderable)
+void PaintHelper::paint(QPainter *painter, QPaintEvent *event, Renderable* renderable)
 {
-    painter->translate(renderable->getPosition().x(), renderable->getPosition().y());
-
     painter->save();
+    painter->translate(renderable->getPosition().x(), renderable->getPosition().y());
     painter->setBrush(circleBrush);
     painter->setPen(circlePen);
 
     painter->drawEllipse(QRectF(0, 0, 10, 10));
     painter->restore();
+    renderable->update();
 }

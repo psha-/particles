@@ -23,5 +23,5 @@ QWidgetRenderer::QWidgetRenderer(QWidget* window)
 
     QTimer *timer = new QTimer(_window);
     _window->connect(timer, &QTimer::timeout, openGL, &GLWidget::animate);
-    timer->start(1);
+    timer->start(0);
 }

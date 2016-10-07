@@ -1,5 +1,5 @@
-#ifndef HELPER_H
-#define HELPER_H
+#ifndef PAINTHELPER_H
+#define PAINTHELPER_H
 
 #include <QBrush>
 #include <QFont>
@@ -7,10 +7,10 @@
 #include <QWidget>
 #include "renderable.h"
 
-class Helper
+class PaintHelper
 {
 public:
-    Helper();
+    PaintHelper();
 
 public:
     void paint(QPainter *painter, QPaintEvent *event, Renderable* renderable);

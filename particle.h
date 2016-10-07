@@ -8,9 +8,9 @@
 class Particle : public Renderable
 {
 public:
-    Particle(Vec3 position, Vec3 velocity, Vec3 acceleration);
+    Particle(Vec3 position = {}, Vec3 velocity= {}, Vec3 acceleration = {});
 
-    inline void setLocation(Vec3 position)
+    inline void setPosition(Vec3 position)
     {
         _position = position;
     }
