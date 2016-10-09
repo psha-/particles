@@ -40,7 +40,7 @@ T* ParticleSource<T>::next()
 template<>
 ExplosionParticle* ParticleSource<ExplosionParticle>::next()
 {
-    return new ExplosionParticle({_distX(_generator), _distY(_generator), _distZ(_generator)}, {0, -5/*Erupt*/, 0},_particles);
+    return new ExplosionParticle({_distX(_generator), _distY(_generator), _distZ(_generator)}, {0, 0, 0},_particles);
 }
 
 #endif // PARTICLESOURCE_H

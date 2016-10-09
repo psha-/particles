@@ -5,6 +5,10 @@ Particle::Particle(Vec3 position, Vec3 velocity, Vec3 acceleration)
 {
 }
 
+void Particle::interact()
+{
+}
+
 void Particle::update()
 {
     _velocity += _acceleration;

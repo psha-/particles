@@ -6,6 +6,9 @@
 #include <QGridLayout>
 #include <QTimer>
 
+
+#include <unistd.h>
+
 QWidgetRenderer::QWidgetRenderer(QWidget* window)
     :_window(window), Renderer()
 {
@@ -15,7 +18,7 @@ QWidgetRenderer::QWidgetRenderer(QWidget* window)
 
     _window->show();
 
-    GLWidget *openGL = new GLWidget(&helper, _window, &_renderables);
+    GLWidget *openGL = new GLWidget(&_paintHelper, _window, &_renderables);
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(openGL, 0, 1);
@@ -23,5 +26,5 @@ QWidgetRenderer::QWidgetRenderer(QWidget* window)
 
     QTimer *timer = new QTimer(_window);
     _window->connect(timer, &QTimer::timeout, openGL, &GLWidget::animate);
-    timer->start(0);
+    timer->start(1);
 }

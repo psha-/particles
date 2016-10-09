@@ -8,7 +8,7 @@
 class Particle : public Renderable
 {
 public:
-    Particle(Vec3 position = {}, Vec3 velocity= {}, Vec3 acceleration = {});
+    Particle(Vec3 position = {0,0,0}, Vec3 velocity= {0,0,0}, Vec3 acceleration = {0,0,0});
 
     inline void setPosition(Vec3 position)
     {
@@ -30,6 +30,7 @@ public:
         return _position;
     }
 
+    virtual void interact();
     void update();
     void render(Renderer* renderer);
 

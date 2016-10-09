@@ -21,7 +21,7 @@ protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    PaintHelper *paintHelper;
+    PaintHelper *_paintHelper;
     std::vector<Renderable*>* _renderables;
 
 };

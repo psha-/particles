@@ -18,6 +18,7 @@ public:
 
     inline void addParticle(Particle* particle)
     {
+        particle->render(_renderer);
         _particles.push_back(particle);
     }
 
@@ -26,7 +27,9 @@ public:
         return _particles;
     }
 
+    void interact();
     void update();
+
     void render(Renderer *renderer);
 
     virtual ~ParticleCollection();
@@ -34,6 +37,7 @@ public:
 protected:
     std::vector<Particle*> _particles;
     Vec3 _position;
+    Renderer* _renderer;
 };
 
 #endif // PARTICLECOLLECTION_H

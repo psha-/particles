@@ -1,8 +1,15 @@
 #include "particlecollection.h"
 
 ParticleCollection::ParticleCollection(std::vector<Particle*> particles)
-    :_particles(particles)
+    :_position({0,0,0}), _particles(particles)
 {
+}
+
+void ParticleCollection::interact()
+{
+    for(auto it = _particles.begin(); it != _particles.end(); it++) {
+        (*it)->interact();
+    }
 }
 
 void ParticleCollection::update()
@@ -14,8 +21,9 @@ void ParticleCollection::update()
 
 void ParticleCollection::render(Renderer* renderer)
 {
+    _renderer = renderer;
     for(auto it = _particles.begin(); it != _particles.end(); it++) {
-        renderer->addRenderable(*it);
+        (*it)->render(_renderer);
     }
 }
 

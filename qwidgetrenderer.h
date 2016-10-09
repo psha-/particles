@@ -12,7 +12,7 @@ public:
     QWidgetRenderer(QWidget* window);
 
 private:
-    PaintHelper helper;
+    PaintHelper _paintHelper;
     QWidget* _window;
 };
 

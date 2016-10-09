@@ -10,7 +10,7 @@ class ExplosionParticle : public Particle
 public:
     ExplosionParticle(Vec3 position, Vec3 velocity, ParticleCollection* particles);
 
-    void update();
+    void interact();
 
 private:
     ParticleCollection* _particles;

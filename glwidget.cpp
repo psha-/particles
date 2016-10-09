@@ -6,10 +6,10 @@
 #include <QWidget>
 #include <QTimer>
 
-GLWidget::GLWidget(PaintHelper *helper, QWidget *parent, std::vector<Renderable*>* renderables)
-    : QOpenGLWidget(parent), paintHelper(helper), _renderables(renderables)
+GLWidget::GLWidget(PaintHelper *paintHelper, QWidget *parent, std::vector<Renderable*>* renderables)
+    : QOpenGLWidget(parent), _paintHelper(paintHelper), _renderables(renderables)
 {
-    setFixedSize(400, 400);
+    setFixedSize(600, 600);
     setAutoFillBackground(false);
 }
 
@@ -20,12 +20,5 @@ void GLWidget::animate()
 
 void GLWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter;
-    painter.begin(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.fillRect(event->rect(), QBrush(QColor(64, 32, 64)));
-    for( auto it = _renderables->begin(); it != _renderables->end(); it++) {
-        paintHelper->paint(&painter, event, *it);
-    }
-    painter.end();
+    PaintHelper::paint(PaintHelper::getPainter(), this, event, _renderables);
 }

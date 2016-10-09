@@ -6,7 +6,8 @@ ExplosionParticle::ExplosionParticle(Vec3 position, Vec3 velocity, ParticleColle
 
 }
 
-void ExplosionParticle::update()
+
+void ExplosionParticle::interact()
 {
     // TODO: Use a tree to test only the nearby objects
     for(std::vector<Particle*>::iterator it = _particles->getParticles().begin(); it != _particles->getParticles().end(); it++) {
@@ -14,10 +15,8 @@ void ExplosionParticle::update()
             continue;
         }
         Vec3 distance = (_position - (*it)->getPosition());
-        _velocity += distance.normalized()*(3/distance.length()); /*Repulsion*/
+        _velocity += distance.normalized()*(1/(distance.length()+1)); /*Repulsion*/
     }
-    _velocity /= 1.1; /*Drag*/
-    _velocity.setY(_velocity.y() + 0.2); /*Gravity*/
-    _position += _velocity;
-
+    _velocity /= 2; /*Drag*/
+//    _velocity.setY(_velocity.y() + 0.3); /*Gravity*/
 }

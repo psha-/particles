@@ -6,6 +6,8 @@
 #include <QPen>
 #include <QWidget>
 #include "renderable.h"
+#include <memory>
+#include <vector>
 
 class PaintHelper
 {
@@ -13,13 +15,9 @@ public:
     PaintHelper();
 
 public:
-    void paint(QPainter *painter, QPaintEvent *event, Renderable* renderable);
+    static std::unique_ptr<QPainter> getPainter();
+    static void paint(std::unique_ptr<QPainter> painter, QWidget* widget, QPaintEvent *event, std::vector<Renderable*>* renderables);
 
-private:
-    QBrush circleBrush;
-    QFont textFont;
-    QPen circlePen;
-    QPen textPen;
 };
 
 #endif
