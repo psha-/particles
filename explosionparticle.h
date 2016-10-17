@@ -2,18 +2,22 @@
 #define EXPLOSIONPARTICLE_H
 
 #include "particle.h"
-#include "particlecollection.h"
 #include "vec3.h"
 
 class ExplosionParticle : public Particle
 {
 public:
-    ExplosionParticle(Vec3 position, Vec3 velocity, ParticleCollection* particles);
+    ExplosionParticle(float mass, Renderer* renderer, Vec3 position, Vec3 velocity, Vec3 acceleration);
 
-    void interact();
+    inline float getSize() {
+        return _mass;
+    }
+    inline float mass() {
+        return _mass;
+    }
 
 private:
-    ParticleCollection* _particles;
+    float _mass;
 };
 
 #endif // EXPLOSIONPARTICLE_H

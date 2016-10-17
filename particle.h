@@ -3,12 +3,14 @@
 
 #include "vec3.h"
 #include "renderable.h"
-#include "renderer.h"
+#include "boundable.h"
 
-class Particle : public Renderable
+class Renderer;
+
+class Particle : public Renderable, public Boundable
 {
 public:
-    Particle(Vec3 position = {0,0,0}, Vec3 velocity= {0,0,0}, Vec3 acceleration = {0,0,0});
+    Particle(Renderer* renderer, Vec3 position, Vec3 velocity = {0,0,0}, Vec3 acceleration = {0,0,0});
 
     inline void setPosition(Vec3 position)
     {
@@ -19,10 +21,19 @@ public:
     {
         _velocity = velocity;
     }
+    inline Vec3 getVelocity() const
+    {
+        return _velocity;
+    }
 
     inline void setAcceleration(Vec3 acceleration)
     {
         _acceleration = acceleration;
+    }
+
+    Vec3 getAcceleration() const
+    {
+        return _acceleration;
     }
 
     inline Vec3 getPosition()
@@ -30,9 +41,11 @@ public:
         return _position;
     }
 
-    virtual void interact();
-    void update();
-    void render(Renderer* renderer);
+    inline void update()
+    {
+        _position +=_velocity += _acceleration;
+    }
+
 
 protected:
     Vec3 _position;

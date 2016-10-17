@@ -1,10 +1,11 @@
 #ifndef QWIDGETRENDERER_H
 #define QWIDGETRENDERER_H
 
-#include "renderable.h"
-#include "renderer.h"
 #include "painthelper.h"
 #include <vector>
+
+class Renderable;
+class Renderer;
 
 class QWidgetRenderer : public Renderer
 {

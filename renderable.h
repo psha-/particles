@@ -2,17 +2,21 @@
 #define RENDERABLE_H
 
 #include "vec3.h"
-
-class Renderer;
+#include "renderer.h"
 
 class Renderable
 {
 public:
-    Renderable();
-
+    Renderable(Renderer* renderer);
     virtual Vec3 getPosition() = 0;
     virtual void update() = 0;
-    virtual void render(Renderer* renderer) = 0;
+    inline virtual float getSize()
+    {
+        return 0;
+    }
+
+protected:
+    Renderer* _renderer;
 };
 
 #endif // RENDERABLE_H

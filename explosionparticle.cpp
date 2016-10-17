@@ -1,22 +1,6 @@
 #include "explosionparticle.h"
 
-ExplosionParticle::ExplosionParticle(Vec3 position, Vec3 velocity, ParticleCollection* particles)
-    :Particle(position, velocity, {0,0,0}), _particles(particles)
+ExplosionParticle::ExplosionParticle(float mass, Renderer* renderer, Vec3 position, Vec3 velocity, Vec3 acceleration)
+    :_mass(mass), Particle(renderer, position, velocity, acceleration)
 {
-
-}
-
-
-void ExplosionParticle::interact()
-{
-    // TODO: Use a tree to test only the nearby objects
-    for(std::vector<Particle*>::iterator it = _particles->getParticles().begin(); it != _particles->getParticles().end(); it++) {
-        if( this == *it ) {
-            continue;
-        }
-        Vec3 distance = (_position - (*it)->getPosition());
-        _velocity += distance.normalized()*(1/(distance.length()+1)); /*Repulsion*/
-    }
-    _velocity /= 2; /*Drag*/
-//    _velocity.setY(_velocity.y() + 0.3); /*Gravity*/
 }

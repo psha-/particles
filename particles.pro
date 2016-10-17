@@ -13,17 +13,18 @@ CONFIG  += c++11
 
 TEMPLATE = app
 
-
 SOURCES += main.cpp \
     particle.cpp \
     temporalparticle.cpp \
-    renderable.cpp \
     renderer.cpp \
     glwidget.cpp \
     qwidgetrenderer.cpp \
-    particlecollection.cpp \
     painthelper.cpp \
-    explosionparticle.cpp
+    explosionparticle.cpp \
+    rectangle.cpp \
+    boundable.cpp \
+    explosion.cpp \
+    renderable.cpp
 
 HEADERS += \
     particle.h \
@@ -36,4 +37,14 @@ HEADERS += \
     particlecollection.h \
     painthelper.h \
     explosionparticle.h \
-    particlesource.h
+    particlesource.h \
+    quadtree.h \
+    quadtreenode.h \
+    boundable.h \
+    rectangle.h \
+    quadrant.h \
+    explosion.h
+
+DISTFILES += \
+    CMakeLists.txt \
+    TestCases

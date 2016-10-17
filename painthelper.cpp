@@ -4,10 +4,6 @@
 #include <QPaintEvent>
 #include <QWidget>
 
-PaintHelper::PaintHelper()
-{
-}
-
 std::unique_ptr<QPainter> PaintHelper::getPainter()
 {
     return std::unique_ptr<QPainter>(new QPainter());
@@ -34,7 +30,7 @@ void PaintHelper::paint(std::unique_ptr<QPainter> painter, QWidget* widget, QPai
         painter->save();
         painter->translate((*renderables)[i]->getPosition().x(), (*renderables)[i]->getPosition().y());
 
-        painter->drawEllipse(QRectF(0, 0, 3, 3));
+        painter->drawEllipse(QRectF(0, 0, (*renderables)[i]->getSize()*2, (*renderables)[i]->getSize()*2));
         painter->restore();
     }
     painter->end();

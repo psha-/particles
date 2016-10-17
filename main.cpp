@@ -1,5 +1,5 @@
 #include "particlesource.h"
-#include "particlecollection.h"
+#include "explosion.h"
 #include "explosionparticle.h"
 #include "qwidgetrenderer.h"
 #include <memory>
@@ -8,6 +8,10 @@
 #include <QThread>
 #include <QMutex>
 
+
+
+#include "quadtree.h"
+
 int main(int argc, char *argv[])
 {
 
@@ -15,21 +19,19 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QWidget window;
-    std::unique_ptr<ParticleCollection> explosion(new ParticleCollection());
-    ParticleSource<ExplosionParticle> source(explosion.get(), {290, 290, 0}, {310, 310, 0});
     QWidgetRenderer renderer(&window);
-    explosion->render(&renderer);
-
+    std::unique_ptr<ParticleCollection<ExplosionParticle>> explosion(new Explosion());
+    ParticleSource<ExplosionParticle> source(&renderer, explosion.get(), {290, 290, 0}, {310, 310, 0});
 
     QThread* thread1 = new QThread;
     QObject::connect(thread1, &QThread::started, [&](){
-        for(int i=0; i<100; i++) {
+        for(int i=0; i<200; i++) {
             lock.lock();
             explosion->addParticle(source.next());
             lock.unlock();
         }
-        QThread::msleep(400);
-        for(int i=0; i<500; i++) {
+        QThread::msleep(1000);
+        for(int i=0; i<400; i++) {
             lock.lock();
             explosion->addParticle(source.next());
             lock.unlock();
@@ -52,7 +54,7 @@ int main(int argc, char *argv[])
             lock.lock();
             explosion->update();
             lock.unlock();
-            QThread::msleep(10);
+            QThread::msleep(30);
         }
     });
 

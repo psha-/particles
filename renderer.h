@@ -1,15 +1,16 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "renderable.h"
 #include <vector>
+
+class Renderable;
 
 class Renderer
 {
 public:
     Renderer();
 
-    virtual void addRenderable(Renderable* renderable);
+    void addRenderable(Renderable* renderable);
 
 protected:
     std::vector<Renderable*> _renderables;

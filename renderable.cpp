@@ -1,6 +1,7 @@
 #include "renderable.h"
 
-Renderable::Renderable()
+Renderable::Renderable(Renderer* renderer)
+    : _renderer(renderer)
 {
+    _renderer->addRenderable(this);
 }
-

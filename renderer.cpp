@@ -1,6 +1,7 @@
 #include "renderer.h"
 
 Renderer::Renderer()
+    :_renderables()
 {
 }
 

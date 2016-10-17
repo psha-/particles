@@ -12,9 +12,6 @@
 class PaintHelper
 {
 public:
-    PaintHelper();
-
-public:
     static std::unique_ptr<QPainter> getPainter();
     static void paint(std::unique_ptr<QPainter> painter, QWidget* widget, QPaintEvent *event, std::vector<Renderable*>* renderables);
 

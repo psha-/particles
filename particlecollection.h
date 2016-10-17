@@ -3,41 +3,56 @@
 
 #include "vec3.h"
 #include <vector>
-#include "particle.h"
-#include "renderable.h"
+#include "quadtree.h"
+#include <memory>
 
-class ParticleCollection : public Renderable
+class Renderable;
+
+template<typename T>
+class ParticleCollection
 {
 public:
-    ParticleCollection(std::vector<Particle*> particles = {});
-
-    inline Vec3 getPosition()
+    ParticleCollection(/*std::vector<T*> particles = {}*/)
+        : _particlesByBounds(600, 600)
+//          _particles(particles)
     {
-        return _position;
+//        for(auto& particle : _particles) {
+//            _particlesByBounds.add(particle);
+//        }
     }
 
-    inline void addParticle(Particle* particle)
+    inline void addParticle(T* particle)
     {
-        particle->render(_renderer);
         _particles.push_back(particle);
+        _particlesByBounds.add(particle);
     }
 
-    inline std::vector<Particle*>& getParticles()
+    inline std::vector<T*>& getParticles()
     {
         return _particles;
     }
 
-    void interact();
-    void update();
+    virtual void interact() = 0;
+    virtual void update()
+    {
+        for(auto& particle : _particles) {
+            particle->update();
+        }
+    }
 
-    void render(Renderer *renderer);
-
-    virtual ~ParticleCollection();
+    virtual ~ParticleCollection()
+    {
+        for (auto it = _particles.begin() ; it != _particles.end(); ++it)
+           {
+             delete (*it);
+           }
+           _particles.clear();
+    }
 
 protected:
-    std::vector<Particle*> _particles;
+    QuadTree<T*> _particlesByBounds;
+    std::vector<T*> _particles;
     Vec3 _position;
-    Renderer* _renderer;
 };
 
 #endif // PARTICLECOLLECTION_H

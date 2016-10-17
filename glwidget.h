@@ -1,10 +1,10 @@
 #ifndef GLWIDGET_H
 #define GLWIDGET_H
 
-#include "renderable.h"
 #include <vector>
 #include <QOpenGLWidget>
 
+class Renderable;
 class PaintHelper;
 
 class GLWidget : public QOpenGLWidget
