@@ -36,7 +36,9 @@ public:
     virtual void update()
     {
         for(auto& particle : _particles) {
+            Rectangle prevBounds = particle->bounds();
             particle->update();
+            _particlesByBounds.update(particle, prevBounds);
         }
     }
 

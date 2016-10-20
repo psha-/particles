@@ -14,14 +14,16 @@ template <typename T>
 class ParticleSource
 {
 public:
-    ParticleSource(Renderer* renderer, ParticleCollection<T>* particles, Vec3 begin, Vec3 end)
+    ParticleSource(Renderer* renderer, ParticleCollection<T>* particles, Vec3 begin, Vec3 end, Vec3 direction = {0,0,0}, float gravity = 0)
         :_renderer(renderer),
         _particles(particles),
         _generator(_rd()),
         _distX(begin.x(), end.x()),
         _distY(begin.y(), end.y()),
         _distZ(begin.z(), end.z()),
-        _distMass(1.0, 4.0)
+        _distMass(2.0, 2.0),
+        _direction(direction),
+        _gravity(gravity)
     {
     }
 
@@ -36,6 +38,8 @@ private:
     std::uniform_int_distribution<> _distY;
     std::uniform_int_distribution<> _distZ;
     std::uniform_int_distribution<> _distMass;
+    Vec3 _direction;
+    float _gravity;
 };
 
 //template <typename T>
@@ -47,7 +51,7 @@ private:
 template<>
 ExplosionParticle* ParticleSource<ExplosionParticle>::next()
 {
-    return new ExplosionParticle(_distMass(_generator), _renderer, {_distX(_generator), _distY(_generator), _distZ(_generator)}, {0, 0, 0}, {0, 0/*Gravity*/, 0});
+    return new ExplosionParticle(_distMass(_generator), _renderer, {_distX(_generator), _distY(_generator), _distZ(_generator)}, _direction, {0, _gravity, 0});
 }
 
 #endif // PARTICLESOURCE_H

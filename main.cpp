@@ -8,10 +8,6 @@
 #include <QThread>
 #include <QMutex>
 
-
-
-#include "quadtree.h"
-
 int main(int argc, char *argv[])
 {
 
@@ -31,11 +27,11 @@ int main(int argc, char *argv[])
             lock.unlock();
         }
         QThread::msleep(1000);
-        for(int i=0; i<400; i++) {
-            lock.lock();
-            explosion->addParticle(source.next());
-            lock.unlock();
-        }
+//        for(int i=0; i<400; i++) {
+//            lock.lock();
+//            explosion->addParticle(source.next());
+//            lock.unlock();
+//        }
     });
 
     QThread* thread2 = new QThread;
@@ -44,7 +40,7 @@ int main(int argc, char *argv[])
             lock.lock();
             explosion->interact();
             lock.unlock();
-            QThread::msleep(100);
+            QThread::msleep(10);
         }
     });
 

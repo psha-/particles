@@ -5,7 +5,7 @@ Rectangle::Rectangle(unsigned int x1, unsigned int y1, unsigned int width, unsig
 {
 }
 
-bool Rectangle::intersects(const Rectangle &other) const
+bool Rectangle::intersects(const Rectangle& other) const
 {
     return _x1 <= other.x2() &&
             other.x1() <= _x2 &&
@@ -13,7 +13,7 @@ bool Rectangle::intersects(const Rectangle &other) const
             other.y1() <= _y2;
 }
 
-bool Rectangle::isInside(const Rectangle &other) const
+bool Rectangle::isInside(const Rectangle& other) const
 {
     return _x2 <= other.x2() &&
             _x1 >= other.x1() &&

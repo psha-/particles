@@ -9,14 +9,16 @@ template<typename T>
 class QuadTreeNode : public Boundable
 {
 public:
-    QuadTreeNode(unsigned int x1, unsigned int y1, unsigned int width, unsigned int height )
-        : Boundable(x1, y1, width, height),
+    QuadTreeNode(QuadTreeNode<T>* pParent, unsigned int x1, unsigned int y1, unsigned int width, unsigned int height )
+        : _pParent(pParent),
+          Boundable(x1, y1, width, height),
           _children(),
           _items()
     {
     }
-    QuadTreeNode(Rectangle bounds)
-        : Boundable(bounds),
+    QuadTreeNode(QuadTreeNode<T>* pParent, Rectangle bounds)
+        : _pParent(pParent),
+          Boundable(bounds),
           _children(),
           _items()
     {
@@ -27,20 +29,31 @@ public:
             delete child;
         }
     }
-
-    inline std::vector<QuadTreeNode<T>*>& children()
+    inline const std::vector<QuadTreeNode<T>*>& children() const
     {
         return _children;
     }
+    void resetChildren()
+    {
+        for(auto& child : _children) {
+            delete child;
+        }
+        _children = std::vector<QuadTreeNode<T>*>();
+    }
+
     inline void setChildren(std::vector<QuadTreeNode<T>*> children)
     {
         _children = children;
     }
-    inline std::vector<T>& items()
+    inline const std::vector<T>& items() const
     {
         return _items;
     }
-    inline std::vector<T> itemsRecursive()
+    inline const QuadTreeNode<T>* parent()
+    {
+        return _pParent;
+    }
+    std::vector<T> itemsRecursive() const
     {
         std::vector<T> items = _items;
         for(auto& child : _children) {
@@ -59,15 +72,31 @@ public:
         _items.erase(_items.begin() + i);
     }
 
-    inline bool shouldSplit()
+    void removeItem(T* item)
+    {
+        for(int i=0; i<_items.size(); i++) {
+            if(item == &_items[i]) {
+                _items.erase(_items.begin() + i);
+                break;
+            }
+        }
+    }
+
+    inline bool shouldSplit() const
     {
         return _children.size() == 0 && _items.size() >= _maxItemCount;
     }
+    inline bool isEmpty() const
+    {
+        return _children.size() == 0 && _items.size() == 0;
+    }
+
 
 private:
+    QuadTreeNode<T>* _pParent;
     std::vector<QuadTreeNode<T>*> _children;
     std::vector<T> _items;
-    const unsigned int _maxItemCount = 2;
+    const unsigned int _maxItemCount = 10;
 };
 
 #endif // TREENODE_H

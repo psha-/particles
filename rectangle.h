@@ -57,14 +57,14 @@ public:
         return _y2 - _y1;
     }
 
-    inline float midX() const
+    inline float xMid() const
     {
-        return width() / 2;
+        return _x1 + width() / 2;
     }
 
-    inline float midY() const
+    inline float yMid() const
     {
-        return height() / 2;
+        return _y1 + height() / 2;
     }
 
     bool intersects(const Rectangle& other) const;
