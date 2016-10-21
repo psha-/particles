@@ -1,7 +1,9 @@
 #include "particle.h"
 
 Particle::Particle(Renderer* renderer, Vec3 position, Vec3 velocity, Vec3 acceleration)
-    : _position(position),
+    : _isDead(false),
+      _lifespan(100),
+      _position(position),
       _velocity(velocity),
       _acceleration(acceleration),
       Renderable(renderer),

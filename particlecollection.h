@@ -4,16 +4,19 @@
 #include "vec3.h"
 #include <vector>
 #include "quadtree.h"
+#include "environment.h"
 #include <memory>
 
 class Renderable;
+class Environment;
 
 template<typename T>
 class ParticleCollection
 {
 public:
-    ParticleCollection(/*std::vector<T*> particles = {}*/)
-        : _particlesByBounds(600, 600)
+    ParticleCollection(/*std::vector<T*> particles = {}*/Environment* environment)
+        : _environment(environment),
+          _particlesByBounds(600, 600)
 //          _particles(particles)
     {
 //        for(auto& particle : _particles) {
@@ -39,6 +42,7 @@ public:
             Rectangle prevBounds = particle->bounds();
             particle->update();
             _particlesByBounds.update(particle, prevBounds);
+            _environment->applyField(particle);
         }
     }
 
@@ -52,6 +56,7 @@ public:
     }
 
 protected:
+    Environment* _environment;
     QuadTree<T*> _particlesByBounds;
     std::vector<T*> _particles;
     Vec3 _position;

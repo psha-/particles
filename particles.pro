@@ -15,7 +15,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     particle.cpp \
-    temporalparticle.cpp \
     renderer.cpp \
     glwidget.cpp \
     qwidgetrenderer.cpp \
@@ -24,11 +23,13 @@ SOURCES += main.cpp \
     rectangle.cpp \
     boundable.cpp \
     explosion.cpp \
-    renderable.cpp
+    renderable.cpp \
+    environment.cpp \
+    interestingenvironment.cpp \
+    fluidenvironment.cpp
 
 HEADERS += \
     particle.h \
-    temporalparticle.h \
     renderable.h \
     renderer.h \
     glwidget.h \
@@ -43,7 +44,10 @@ HEADERS += \
     boundable.h \
     rectangle.h \
     quadrant.h \
-    explosion.h
+    explosion.h \
+    environment.h \
+    interestingenvironment.h \
+    fluidenvironment.h
 
 DISTFILES += \
     CMakeLists.txt \

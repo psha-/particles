@@ -42,12 +42,6 @@ private:
     float _gravity;
 };
 
-//template <typename T>
-//T* ParticleSource<T>::next()
-//{
-//    return new T({_distX(_generator), _distY(_generator), _distZ(_generator)});
-//}
-
 template<>
 ExplosionParticle* ParticleSource<ExplosionParticle>::next()
 {

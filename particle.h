@@ -43,15 +43,26 @@ public:
 
     inline void update()
     {
+        if(--_lifespan <= 0 && !_isDead) {
+            _die();
+        }
         _velocity += _acceleration;
         _position += 5*_velocity;
     }
 
+    virtual void addForce(Vec3 force) = 0;
+
 
 protected:
+    float _lifespan;
+    bool _isDead;
     Vec3 _position;
     Vec3 _velocity;
     Vec3 _acceleration;
+    void _die()
+    {
+        _isDead = true;
+    }
 };
 
 #endif // PARTICLE_H

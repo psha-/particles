@@ -2,6 +2,8 @@
 #include "explosion.h"
 #include "explosionparticle.h"
 #include "qwidgetrenderer.h"
+#include "interestingenvironment.h"
+#include "fluidenvironment.h"
 #include <memory>
 #include <QApplication>
 #include <QWidget>
@@ -16,7 +18,8 @@ int main(int argc, char *argv[])
 
     QWidget window;
     QWidgetRenderer renderer(&window);
-    std::unique_ptr<ParticleCollection<ExplosionParticle>> explosion(new Explosion());
+    FluidEnvironment environment = FluidEnvironment();
+    std::unique_ptr<ParticleCollection<ExplosionParticle>> explosion(new Explosion(&environment));
     ParticleSource<ExplosionParticle> source(&renderer, explosion.get(), {290, 290, 0}, {310, 310, 0});
 
     QThread* thread1 = new QThread;
@@ -26,8 +29,8 @@ int main(int argc, char *argv[])
             explosion->addParticle(source.next());
             lock.unlock();
         }
-        QThread::msleep(1000);
-        for(int i=0; i<400; i++) {
+        QThread::msleep(700);
+        for(int i=0; i<600; i++) {
             lock.lock();
             explosion->addParticle(source.next());
             lock.unlock();

@@ -33,13 +33,6 @@ public:
     {
         return _children;
     }
-//    void resetChildren()
-//    {
-//        for(auto& child : _children) {
-//            delete child;
-//        }
-//        _children = std::vector<QuadTreeNode<T>*>();
-//    }
 
     inline void setChildren(std::vector<QuadTreeNode<T>*> children)
     {
