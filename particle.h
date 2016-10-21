@@ -43,7 +43,8 @@ public:
 
     inline void update()
     {
-        _position +=_velocity += _acceleration;
+        _velocity += _acceleration;
+        _position += 5*_velocity;
     }
 
 

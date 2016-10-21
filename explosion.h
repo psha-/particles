@@ -11,7 +11,7 @@ public:
     void interact();
 private:
     unsigned int _interactRadius;
-    static unsigned int const _defaultInteractRadius = 50;
+    static unsigned int const _defaultInteractRadius = 10;
 };
 
 #endif // EXPLOSION_H

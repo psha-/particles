@@ -41,7 +41,7 @@ private:
     }
 
 
-    static bool _areChildrenEmpty(const QuadTreeNode<T>& node);
+//    static bool _areChildrenEmpty(const QuadTreeNode<T>& node);
     static Quadrant _getQuadrant(const QuadTreeNode<T>& node, const Rectangle& bounds);
     static Rectangle _getQuadrantBounds(const QuadTreeNode<T>& node, Quadrant quadrant);
 
@@ -71,16 +71,16 @@ bool QuadTree<T>::add(T item)
     return true;
 }
 
-template<typename T>
-bool QuadTree<T>::_areChildrenEmpty(const QuadTreeNode<T>& node)
-{
-    for(auto& child : node.children()) {
-        if(!child->isEmpty()) {
-            return false;
-        }
-    }
-    return true;
-}
+//template<typename T>
+//bool QuadTree<T>::_areChildrenEmpty(const QuadTreeNode<T>& node)
+//{
+//    for(auto& child : node.children()) {
+//        if(!child->isEmpty()) {
+//            return false;
+//        }
+//    }
+//    return true;
+//}
 
 template<typename T>
 void QuadTree<T>::update(T item, const Rectangle& prevBounds)
@@ -88,10 +88,10 @@ void QuadTree<T>::update(T item, const Rectangle& prevBounds)
     if(_needsUpdate(item->bounds(), prevBounds)) {
         QuadTreeNode<T>* node = _findNode(prevBounds, _pRoot);
         node->removeItem(&item);
-        QuadTreeNode<T>* parent = const_cast<QuadTreeNode<T>*>(node->parent());
-        if(_areChildrenEmpty(*parent)) {
-            (*parent).resetChildren();
-        }
+//        QuadTreeNode<T>* parent = const_cast<QuadTreeNode<T>*>(node->parent());
+//        if(_areChildrenEmpty(*parent)) {
+//            (*parent).resetChildren();
+//        }
         add(item);
     }
 }
